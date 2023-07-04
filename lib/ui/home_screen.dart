@@ -94,6 +94,7 @@ class _HomeScreenState extends State<HomeScreen> {
         currentIndex: _selectedIndex,
         selectedItemColor: Colors.white,
         onTap: (index) {
+          _selectedIndex = index;
           switch (index) {
             case 0:
               context.go('/shop');

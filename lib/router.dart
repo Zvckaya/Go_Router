@@ -6,6 +6,7 @@ import 'constants.dart';
 import 'login_state.dart';
 import 'ui/cart.dart';
 import 'ui/create_account.dart';
+import 'ui/details.dart';
 import 'ui/error_page.dart';
 import 'ui/home_screen.dart';
 import 'ui/login.dart';
@@ -42,12 +43,19 @@ class MyRouter {
         }),
         routes: [
           GoRoute(
-            path: 'personal',
+            path: 'profile-personal',
             name: profilePersonalRouteName,
             builder: (context, state) {
               return const PersonalInfo();
             },
-          )
+          ),
+          GoRoute(
+            path: 'details/:item',
+            name: detailsRouteName,
+            builder: (context, state) {
+              return Details(description: state.pathParameters['item'] ?? '');
+            },
+          ),
         ],
       )
     ],
@@ -55,7 +63,6 @@ class MyRouter {
       final loggedIn = loginState.loggedIn;
       final inAuthPages = state.location.contains(loginRouteName) ||
           state.location.contains(createAccountRouteName);
-
       if (loggedIn && inAuthPages) return '/profile';
       if (!loggedIn && !inAuthPages) return '/login';
     },

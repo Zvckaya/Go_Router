@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:provider/provider.dart';
 
 import '../constants.dart';
+import '../login_state.dart';
 
 class Profile extends StatefulWidget {
   const Profile({Key? key}) : super(key: key);
@@ -88,14 +90,18 @@ class _ProfileState extends State<Profile> {
         padding: const EdgeInsets.all(8.0),
         child: ListTile(
           title: const Text(
-            'More Info',
+            'Logout',
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           onTap: () {
-            // TODO: Add More Info Route
+            LogOut(context);
           },
         ),
       ),
     );
+  }
+
+  void LogOut(BuildContext context) {
+    Provider.of<LoginState>(context, listen: false).loggedIn = false;
   }
 }
